@@ -4,7 +4,7 @@ import {
   List,
   ListItem,
   ListItemIcon,
-  Icon,
+  Divider,
   ListItemText,
   Typography,
   Drawer,
@@ -29,15 +29,14 @@ const styles = theme => ({
   },
   mainContent: {
     paddingLeft: drawerWidth + 10,
-    paddingTop: 74,
+    paddingTop: 80,
+    paddingRight: 15,
   },
   appBar: {
     paddingLeft: drawerWidth,
     justifyContent: 'space-between',
   },
-  appBarColor: {
-    backgroundColor: theme.palette.bw.dark,
-  },
+  appBarColor: {},
   centerVertically: {
     margin: 'auto 0',
   },
@@ -74,7 +73,7 @@ const lines = [
 
 class Layout extends Component {
   state = {
-    open: false,
+    open: true,
   };
 
   handleClick = () => {
@@ -101,14 +100,20 @@ class Layout extends Component {
       <div>
         <Drawer variant="permanent" classes={{ paper: classes.drawer }}>
           <List>
-            <ListItem>
-              <ListItemIcon>
-                <img src="/static/images/mot-logo.svg" className={classes.logo} />
-              </ListItemIcon>
-              <ListItemText primary="LA Metro Monitor" />
-            </ListItem>
+            <Link href="/">
+              <a style={{ textDecoration: 'none' }}>
+                <ListItem style={{ padding: '5px 16px' }}>
+                  <ListItemIcon>
+                    <img src="/static/images/mot-logo.svg" className={classes.logo} alt="Logo" />
+                  </ListItemIcon>
+                  <ListItemText primary="LA Metro Monitor" />
+                </ListItem>
+              </a>
+            </Link>
+            <Divider />
+            {' '}
             <ListItem button onClick={this.handleClick}>
-              <DirectionsTransitIcon className={classes.icon} />
+              <DirectionsTransitIcon className={classes.icon} style={{ marginLeft: 0 }} />
               <ListItemText inset primary="Lines" />
               {this.state.open ? <ExpandLess /> : <ExpandMore />}
             </ListItem>
@@ -117,7 +122,9 @@ class Layout extends Component {
             </Collapse>
           </List>
         </Drawer>
-        <div className={classes.mainContent}>{this.props.children}</div>
+        <div className={classes.mainContent} style={{ ...this.props.style }}>
+          {this.props.children}
+        </div>
       </div>
     );
   }

@@ -1,18 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Tabs,
-  Tab,
-  AppBar,
-  Toolbar,
-  Collapse,
-  List,
-  ListItem,
-  ListItemIcon,
-  Icon,
-  ListItemText,
-  Typography,
-  Drawer,
-} from '@material-ui/core';
+import { AppBar, Typography, Toolbar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 300;
@@ -33,9 +20,7 @@ const styles = theme => ({
     paddingLeft: drawerWidth,
     justifyContent: 'space-between',
   },
-  appBarColor: {
-    backgroundColor: theme.palette.bw.dark,
-  },
+  appBarColor: {},
   centerVertically: {
     margin: 'auto 0',
   },
@@ -58,21 +43,8 @@ const styles = theme => ({
 });
 
 class Layout extends Component {
-  state = {
-    selectedTab: 0,
-  };
-
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
-  };
-
-  handleTabChange = (event, newValue) => {
-    this.setState(state => ({ selectedTab: newValue }));
-  };
-
   render() {
     const { classes } = this.props;
-    const selectedTab = this.state.selectedTab;
     return (
       <div>
         {' '}
@@ -80,16 +52,15 @@ class Layout extends Component {
           position="fixed"
           classes={{ root: classes.appBar, colorPrimary: classes.appBarColor }}
         >
-          <div className={classes.containAppBar}>
-            <Typography variant="h5" classes={{ root: classes.centerVertically }} color="primary">
+          <Toolbar className={classes.containAppBar}>
+            <Typography variant="h5" classes={{ root: classes.centerVertically }} color="inherit">
               {this.props.pageTitle}
             </Typography>
-            <Tabs value={selectedTab} onChange={this.handleTabChange} textColor="primary">
-              <Tab className={classes.font} label="Stats" />
-              <Tab className={classes.font} label="Diagram" />
-            </Tabs>
-          </div>
+
+            {this.props.children}
+          </Toolbar>
         </AppBar>
+        {' '}
       </div>
     );
   }
