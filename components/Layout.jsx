@@ -56,12 +56,20 @@ const styles = theme => ({
 });
 
 const lines = [
-  { name: 'Blue', id: 801 },
-  { name: 'Red', id: 802 },
-  { name: 'Green', id: 803 },
-  { name: 'Gold', id: 804 },
-  { name: 'Purple', id: 805 },
-  { name: 'Expo', id: 806 },
+  {
+    name: 'Blue',
+    id: 801,
+    color: '#2461AA',
+  },
+  {
+    name: 'Red',
+    id: 802,
+    color: '#FC1921',
+  },
+  { name: 'Green', id: 803, color: '#6BBD46' },
+  { name: 'Gold', id: 804, color: '#FFB300' },
+  { name: 'Purple', id: 805, color: '#9561A8' },
+  { name: 'Expo', id: 806, color: '#50C8E8' },
 ];
 
 class Layout extends Component {
@@ -82,7 +90,7 @@ class Layout extends Component {
         {lines.map(line => (
           <Link href={`/line/${line.id}`} key={line.id.toString()}>
             <ListItem button>
-              <ListItemText primary={`${line.name}`} />
+              <ListItemText primary={<span style={{ color: line.color }}>{line.name}</span>} />
             </ListItem>
           </Link>
         ))}

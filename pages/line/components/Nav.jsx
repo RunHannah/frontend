@@ -51,6 +51,10 @@ const styles = theme => ({
     width: 45,
     height: 45,
   },
+  font: {
+    fontFamily: '"Helvetica Neue"',
+    fontSize: 20,
+  },
 });
 
 class Layout extends Component {
@@ -81,8 +85,8 @@ class Layout extends Component {
               {this.props.pageTitle}
             </Typography>
             <Tabs value={selectedTab} onChange={this.handleTabChange} textColor="primary">
-              <Tab label="Stats" />
-              <Tab label="Diagram" />
+              <Tab className={classes.font} label="Stats" />
+              <Tab className={classes.font} label="Diagram" />
             </Tabs>
           </div>
         </AppBar>
